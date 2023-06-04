@@ -1,0 +1,186 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Senac Bike Store API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/categorias": {
+            "get": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "Retorna a lista de Categorias",
+                "description": "Retorna o JSON da lista de Categorias",
+                "operationId": "getCategoriasList",
+                "responses": {
+                    "200": {
+                        "description": "Operação executada com sucesso"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "Cria uma nova Categoria",
+                "description": "Retorna o JSON com os dados da nova Categoria",
+                "operationId": "storeCategoria",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreCategoriaRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operação executada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Categoria"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/categorias/{id}": {
+            "get": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "Retorna a informação de uma categoria",
+                "description": "Retorna o JSON da Categoria requisitada",
+                "operationId": "getCategoriaById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id da Categoria",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação executada com sucesso"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "Apaga uma Categoria existente",
+                "description": "Apaga uma Categoria existente e não há retorno de dados",
+                "operationId": "deleteCategoria",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id da Categoria",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operação executada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "Atualiza uma Categoria existente",
+                "description": "Retorna o JSON da Categoria atualizada",
+                "operationId": "updateCategoria",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id da Categoria",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreCategoriaRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operação executada com sucesso"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Categoria": {
+                "title": "Categoria",
+                "description": "Modelo da Categoria",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "nome_da_categoria": {
+                        "title": "nome da categoria",
+                        "description": "Nome da Categoria",
+                        "type": "string",
+                        "example": "Bicicleta"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Categoria"
+                }
+            },
+            "StoreCategoriaRequest": {
+                "title": "Requisicao para nova Categoria",
+                "description": "Requisição enviada via Body para uma nova Categoria",
+                "required": [
+                    "nome_da_categoria"
+                ],
+                "properties": {
+                    "nome_da_categoria": {
+                        "title": "nome da categoria",
+                        "description": "Nome da nova categoria",
+                        "type": "string",
+                        "example": "Bicleta"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
